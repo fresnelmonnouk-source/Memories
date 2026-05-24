@@ -2,12 +2,10 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import styles from './AuthForm.module.css'
 
 export function SignupForm() {
-  const router = useRouter()
   const [displayName, setDisplayName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -42,8 +40,7 @@ export function SignupForm() {
       setLoading(false)
       return
     }
-    router.push('/compte')
-    router.refresh()
+    window.location.assign('/compte')
   }
 
   if (needsConfirm) {

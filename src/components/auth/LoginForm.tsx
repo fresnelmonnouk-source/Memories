@@ -2,14 +2,15 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import styles from './AuthForm.module.css'
 
 export function LoginForm() {
-  const router = useRouter()
   const params = useSearchParams()
-  const next = params.get('next') || '/compte'
+  // Sanitise `next` : seulement un chemin interne (évite un open-redirect).
+  const raw = params.get('next') || '/compte'
+  const next = raw.startsWith('/') && !raw.startsWith('//') ? raw : '/compte'
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -27,8 +28,9 @@ export function LoginForm() {
       setLoading(false)
       return
     }
-    router.push(next)
-    router.refresh()
+    // Navigation COMPLÈTE (pas router.push) : garantit que le serveur reçoit
+    // les cookies de session fraîchement posés → pas de renvoi vers /connexion.
+    window.location.assign(next)
   }
 
   return (
