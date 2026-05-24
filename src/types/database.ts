@@ -119,6 +119,19 @@ export type RateLimit = {
   blocked_until: string | null
 }
 
+export type UserRole = 'client' | 'admin'
+
+export type Profile = {
+  id: string
+  email: string | null
+  display_name: string | null
+  role: UserRole
+  account_tryouts_used: number
+  subscription_status: string
+  created_at: string
+  updated_at: string
+}
+
 // Database type compatible avec le générique supabase-js v2 (GenericSchema).
 // Doit inclure Views / Functions / Enums / CompositeTypes, sinon les requêtes
 // `.from(...)` résolvent en `never`.
@@ -131,6 +144,7 @@ export interface Database {
       tryouts:      { Row: Tryout;      Insert: Partial<Tryout>;      Update: Partial<Tryout>;      Relationships: [] }
       bookings:     { Row: Booking;     Insert: Partial<Booking>;     Update: Partial<Booking>;     Relationships: [] }
       rate_limits:  { Row: RateLimit;   Insert: Partial<RateLimit>;   Update: Partial<RateLimit>;   Relationships: [] }
+      profiles:     { Row: Profile;     Insert: Partial<Profile>;     Update: Partial<Profile>;     Relationships: [] }
     }
     Views: { [_ in never]: never }
     Functions: {
@@ -142,6 +156,7 @@ export interface Database {
       body_zone: BodyZone
       tryout_status: TryoutStatus
       booking_status: BookingStatus
+      user_role: UserRole
     }
     CompositeTypes: { [_ in never]: never }
   }

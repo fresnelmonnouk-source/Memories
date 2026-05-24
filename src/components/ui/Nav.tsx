@@ -37,6 +37,7 @@ export function Nav() {
         </ul>
 
         <div className={styles.right}>
+          <Link href="/compte" className={styles.account}>Compte</Link>
           <Link href="/reservation" className={styles.cta}>
             <span className={styles.dot}></span>Réserver
           </Link>
@@ -63,6 +64,12 @@ export function Nav() {
               </Link>
             </li>
           ))}
+          <li>
+            <Link href="/compte" onClick={() => setOpen(false)}>
+              <span className={styles.mNum}>06</span>
+              Compte
+            </Link>
+          </li>
           <li>
             <Link href="/reservation" onClick={() => setOpen(false)} className={styles.mCta}>
               <span className={styles.mNum}>★</span>

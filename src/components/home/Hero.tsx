@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { HeroDemo } from './HeroDemo'
 import styles from './Hero.module.css'
 
 export function Hero() {
@@ -13,11 +14,15 @@ export function Hero() {
         <span>Essais générés <strong>·</strong> 12 847</span>
       </div>
 
-      <h1 className={styles.title}>
-        <span className={styles.line}>Essaie</span>
-        <span className={styles.line}><span className={styles.italic}>avant</span></span>
-        <span className={styles.line}>d&apos;oser<span style={{ color: 'var(--blood)' }}>.</span></span>
-      </h1>
+      <div className={styles.stage}>
+        <h1 className={styles.title}>
+          <span className={styles.line}>Essaie</span>
+          <span className={styles.line}><span className={styles.italic}>avant</span></span>
+          <span className={styles.line}>d&apos;oser<span style={{ color: 'var(--blood)' }}>.</span></span>
+        </h1>
+
+        <HeroDemo />
+      </div>
 
       <div className={styles.bottom}>
         <div className={styles.desc}>
