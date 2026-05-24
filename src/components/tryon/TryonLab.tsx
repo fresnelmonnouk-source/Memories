@@ -160,6 +160,32 @@ export function TryonLab({ tattoos }: { tattoos: TattooItem[] }) {
     }
   }
 
+  // Télécharge un rendu : on récupère le blob (les URLs Supabase sont
+  // cross-origin → l'attribut `download` seul ne suffit pas pour forcer
+  // l'enregistrement, il faut passer par un object URL).
+  const downloadRender = useCallback(async (url: string, filename: string) => {
+    try {
+      const res = await fetch(url)
+      const blob = await res.blob()
+      const objectUrl = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = objectUrl
+      a.download = filename
+      document.body.appendChild(a)
+      a.click()
+      a.remove()
+      URL.revokeObjectURL(objectUrl)
+    } catch {
+      setError('Téléchargement impossible. Réessaie ou fais un clic droit › Enregistrer l\'image.')
+    }
+  }, [])
+
+  const downloadAll = useCallback(() => {
+    if (!result) return
+    downloadRender(result.resultWideUrl, 'memories-essayage-plan-large.png')
+    downloadRender(result.resultCloseUrl, 'memories-essayage-gros-plan.png')
+  }, [result, downloadRender])
+
   const canGoToStep2 = wide && close
   const canGenerate = wide && close && selectedTattoo
 
@@ -398,12 +424,17 @@ export function TryonLab({ tattoos }: { tattoos: TattooItem[] }) {
             )}
 
             {step === 3 && result && (
-              <a
-                href={`/reservation?tryout=${result.sessionToken}`}
-                className={styles.btnPrimary}
-              >
-                Réserver maintenant <span>→</span>
-              </a>
+              <>
+                <button type="button" onClick={downloadAll} className={styles.btnGhost}>
+                  Télécharger <span>↓</span>
+                </button>
+                <a
+                  href={`/reservation?tryout=${result.sessionToken}`}
+                  className={styles.btnPrimary}
+                >
+                  Réserver maintenant <span>→</span>
+                </a>
+              </>
             )}
           </div>
         </div>

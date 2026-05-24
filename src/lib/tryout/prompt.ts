@@ -44,6 +44,11 @@ export function buildTryoutPrompt(input: {
 
 TASK: Apply the tattoo design from the SECOND image onto the ${zoneFr} of the person in the FIRST image.
 
+FAITHFULNESS TO THE DESIGN (CRITICAL — do not break this):
+- Reproduce the tattoo of Image 2 EXACTLY as drawn: same shapes, line work, composition, colors, proportions and level of detail.
+- Do NOT redraw, restyle, reinterpret, simplify, embellish, recolor, add or remove ANY element of the design. It is a fixed, finished artwork.
+- Your ONLY freedom is to PLACE and CONFORM it to the body (position, scale, curvature, perspective, lighting integration) — never to alter the artwork itself. The viewer must recognize the exact same design.
+
 INPUTS:
 - Image 1 (${shotInstr}): the photo of the person. This photo MUST stay IDENTICAL except for the added tattoo. Treat every pixel outside the tattoo zone as locked.
 - Image 2: the tattoo design to apply. This is a flat artwork; ignore its background, transfer only the design.

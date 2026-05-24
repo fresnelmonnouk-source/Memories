@@ -29,7 +29,7 @@ export function Nav() {
         </Link>
 
         <ul className={styles.links}>
-          {LINKS.slice(1).map((l) => ( // Skip "Accueil" sur desktop (logo = accueil)
+          {LINKS.map((l) => (
             <li key={l.href}>
               <Link href={l.href} data-num={l.num}>{l.label}</Link>
             </li>
