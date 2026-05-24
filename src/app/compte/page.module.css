@@ -114,6 +114,58 @@
 }
 .signout:hover { color: var(--blood); }
 
+/* Sections dashboard */
+.section { margin-bottom: 40px; }
+.sectionTitle {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--blood);
+  padding-bottom: 12px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.list { display: grid; gap: 10px; }
+.listRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px 18px;
+  background: var(--paper);
+}
+.rowMain { font-family: var(--font-display); font-style: italic; font-size: 19px; letter-spacing: -0.01em; }
+.rowMeta { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mute); margin-top: 2px; }
+.rowLink { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--blood); white-space: nowrap; }
+.rowLink:hover { border-bottom: 1px solid var(--blood); }
+
+.emptyBox {
+  border: 1px dashed var(--line-strong);
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  color: var(--mute);
+  font-size: 15px;
+}
+.inlineLink { color: var(--blood); }
+.inlineLink:hover { border-bottom: 1px solid var(--blood); }
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 18px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--paper);
+  padding: 24px;
+}
+.infoGrid > div { display: grid; gap: 6px; align-content: start; }
+.infoVal { font-size: 15px; }
+
 /* Grille de modules admin (« à venir ») */
 .modules {
   display: grid;
@@ -127,7 +179,11 @@
   padding: 22px;
   display: grid;
   gap: 6px;
+  transition: border-color 0.2s, transform 0.2s var(--ease-out);
 }
+/* Module actif (Link) : bordure pleine + interactif */
+a.module { border-style: solid; }
+a.module:hover { border-color: var(--blood); transform: translateY(-3px); }
 .moduleName { font-family: var(--font-display); font-style: italic; font-size: 22px; }
 .soon {
   font-family: var(--font-mono);
@@ -136,3 +192,4 @@
   text-transform: uppercase;
   color: var(--mute);
 }
+.soon[data-active="true"] { color: var(--blood); }
