@@ -5,6 +5,7 @@ import { Nav } from '@/components/ui/Nav'
 import { Footer } from '@/components/ui/Footer'
 import { Cursor } from '@/components/ui/Cursor'
 import { RevealObserver } from '@/components/ui/RevealObserver'
+import { Assistant } from '@/components/assistant/Assistant'
 import '@/styles/globals.css'
 
 export const metadata: Metadata = {
@@ -48,6 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Nav />
         <main>{children}</main>
         <Footer />
+        <Assistant />
         <RevealObserver />
       </body>
     </html>
