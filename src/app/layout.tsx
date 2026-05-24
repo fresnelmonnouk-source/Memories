@@ -16,6 +16,14 @@ export const metadata: Metadata = {
     title: 'Memories° — L\'encre ne se reprend pas. Le pixel, si.',
     description: 'Essaie ton tatouage en IA avant de prendre rendez-vous.',
     type: 'website',
+    siteName: 'Memories°',
+    locale: 'fr_FR',
+    url: '/',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Memories° — Essaie ton tatouage en IA',
+    description: 'Essaie virtuellement ton tatouage sur ton corps avant de prendre rendez-vous.',
   },
 }
 

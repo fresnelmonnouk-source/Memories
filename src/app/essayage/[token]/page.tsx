@@ -6,6 +6,8 @@ import styles from './page.module.css'
 export const metadata = {
   title: 'Ton essayage — Memories°',
   description: 'Le rendu de ton essayage virtuel.',
+  // Page personnelle atteignable uniquement via le lien email → hors index.
+  robots: { index: false, follow: false },
 }
 
 // Page lecture-seule d'un essayage, atteignable via le lien partagé dans l'email
