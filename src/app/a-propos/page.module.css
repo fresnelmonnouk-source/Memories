@@ -1,0 +1,170 @@
+.page {
+  padding: 160px 40px 100px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 100px;
+  display: grid;
+  gap: 24px;
+}
+
+.crumb {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--blood);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.bar { width: 50px; height: 1px; background: var(--blood); }
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 9vw, 130px);
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  font-weight: 400;
+}
+.italic { font-style: italic; color: var(--blood); }
+
+.section {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 80px;
+  padding: 60px 0;
+  border-top: 1px solid var(--line);
+  scroll-margin-top: 120px;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--blood);
+}
+
+.body {
+  font-size: 16px;
+  line-height: 1.7;
+  opacity: 0.9;
+}
+
+.body p + p { margin-top: 20px; }
+.body strong { color: var(--blood); font-weight: 500; }
+
+.list {
+  list-style: none;
+  display: grid;
+  gap: 18px;
+}
+
+.list li {
+  padding-left: 24px;
+  position: relative;
+}
+
+.list li::before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  color: var(--blood);
+}
+
+.tarifs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.tarif {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  transition: border-color 0.3s;
+}
+
+.tarif:hover { border-color: var(--blood); }
+
+.tarif h3 {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--blood);
+}
+
+.size {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mute);
+  margin: 8px 0;
+}
+
+.price {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.note {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--blood);
+  margin-top: 12px;
+}
+
+.faq {
+  border-bottom: 1px solid var(--line);
+  padding: 18px 0;
+}
+
+.faq summary {
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-style: italic;
+  letter-spacing: -0.01em;
+  list-style: none;
+  position: relative;
+  padding-right: 30px;
+  transition: color 0.2s;
+}
+
+.faq summary::after {
+  content: '+';
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: var(--blood);
+  font-size: 28px;
+  line-height: 0.8;
+  transition: transform 0.3s;
+}
+
+.faq[open] summary::after {
+  transform: rotate(45deg);
+}
+
+.faq summary:hover { color: var(--blood); }
+
+.faq p {
+  margin-top: 14px;
+  font-size: 15px;
+  line-height: 1.65;
+  opacity: 0.8;
+}
+
+@media (max-width: 880px) {
+  .page { padding: 130px 20px 60px; }
+  .section { grid-template-columns: 1fr; gap: 20px; padding: 40px 0; }
+}

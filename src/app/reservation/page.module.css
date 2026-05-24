@@ -1,0 +1,44 @@
+.page {
+  padding: 160px 40px 100px;
+  max-width: 980px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+.header {
+  margin-bottom: 60px;
+  display: grid;
+  gap: 24px;
+}
+
+.crumb {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--blood);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.bar { width: 50px; height: 1px; background: var(--blood); }
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 9vw, 130px);
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  font-weight: 400;
+}
+.italic { font-style: italic; color: var(--blood); }
+
+.intro {
+  font-size: 16px;
+  line-height: 1.6;
+  opacity: 0.85;
+  max-width: 560px;
+}
+
+@media (max-width: 880px) {
+  .page { padding: 130px 20px 60px; }
+}

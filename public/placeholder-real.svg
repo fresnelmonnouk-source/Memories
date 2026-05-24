@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500">
+  <rect width="400" height="500" fill="#0a0807"/>
+  <rect x="60" y="60" width="280" height="380" fill="none" stroke="#d62828" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <text x="200" y="260" text-anchor="middle" fill="#f0ebe3" font-family="Georgia,serif" font-style="italic" font-size="32">Memories</text>
+  <text x="200" y="470" text-anchor="middle" fill="#6b6660" font-family="monospace" font-size="10" letter-spacing="3">RÉALISATION DÉMO</text>
+</svg>

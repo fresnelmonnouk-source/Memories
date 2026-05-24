@@ -1,0 +1,524 @@
+.lab {
+  display: grid;
+  gap: 30px;
+}
+
+/* ============ Stepper ============ */
+.stepper {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  overflow: hidden;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.step {
+  background: transparent;
+  border: none;
+  color: var(--mute);
+  padding: 16px 28px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.step:not(:last-child) {
+  border-right: 1px solid var(--line);
+}
+
+.step:hover:not(:disabled) {
+  color: var(--ink);
+}
+
+.step:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.step.active {
+  background: var(--blood);
+  color: var(--ink);
+}
+
+.step.active .n {
+  color: var(--ink);
+}
+
+.n {
+  font-size: 9px;
+  color: var(--blood);
+  font-weight: 600;
+}
+
+/* ============ Frame ============ */
+.frame {
+  border: 1px solid var(--line-strong);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--paper);
+}
+
+.frameHeader {
+  background: #0d0a08;
+  border-bottom: 1px solid var(--line);
+  padding: 14px 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+
+.dots {
+  display: flex;
+  gap: 8px;
+}
+.dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--line-strong);
+}
+.dots span:first-child { background: var(--blood); }
+
+.frameBody {
+  padding: 40px;
+  min-height: 500px;
+  display: grid;
+  gap: 30px;
+}
+
+/* ============ Step 1: Upload ============ */
+.uploadGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.dropzone {
+  aspect-ratio: 4/5;
+  border: 2px dashed var(--line-strong);
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  cursor: pointer;
+  background: var(--bg);
+  padding: 30px;
+  text-align: center;
+  transition: all 0.3s var(--ease-out);
+  overflow: hidden;
+}
+
+.dropzone:hover {
+  border-color: var(--blood);
+  background: rgba(214, 40, 40, 0.04);
+}
+
+.dropzoneFilled {
+  border-style: solid;
+  border-color: var(--blood);
+  padding: 0;
+}
+
+.preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: var(--paper);
+  color: var(--mute);
+  padding: 5px 10px;
+  border-radius: 4px;
+  z-index: 2;
+}
+
+.badgeOk {
+  background: var(--blood);
+  color: var(--ink);
+}
+
+.icon {
+  font-size: 60px;
+  color: var(--blood);
+  line-height: 1;
+  margin-bottom: 14px;
+  display: block;
+}
+
+.zTitle {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-style: italic;
+  letter-spacing: -0.02em;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.zLabel {
+  font-size: 13px;
+  opacity: 0.7;
+  display: block;
+  margin-bottom: 14px;
+}
+
+.zHint {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--mute);
+  display: block;
+}
+
+/* ============ Step 2: Config + Catalogue ============ */
+.configRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.configBlock {
+  display: grid;
+  gap: 10px;
+}
+
+.configBlock label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+
+.configBlock select {
+  background: var(--bg);
+  border: 1px solid var(--line-strong);
+  color: var(--ink);
+  padding: 14px 18px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.configBlock select:focus {
+  border-color: var(--blood);
+}
+
+.sizes {
+  display: flex;
+  gap: 6px;
+}
+
+.sizeBtn {
+  flex: 1;
+  background: var(--bg);
+  border: 1px solid var(--line-strong);
+  color: var(--ink);
+  padding: 14px 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.sizeBtn:hover {
+  border-color: var(--blood);
+}
+
+.sizeActive {
+  background: var(--blood);
+  border-color: var(--blood);
+  color: var(--ink);
+}
+
+.catLabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+.catLabel strong { color: var(--blood); font-weight: 500; }
+
+.tatGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.tatCard {
+  aspect-ratio: 1;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  transition: all 0.2s;
+}
+
+.tatCard:hover {
+  border-color: var(--blood);
+  transform: translateY(-2px);
+}
+
+.tatCard img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  flex: 1;
+}
+
+.tatSelected {
+  border-color: var(--blood);
+  box-shadow: 0 0 0 2px var(--blood);
+}
+
+.tatSelected::after {
+  content: '✓';
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--blood);
+  color: var(--ink);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+}
+
+.tatLabel {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(10,8,7,0.92), transparent);
+  padding: 18px 10px 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: left;
+  color: var(--ink);
+}
+
+.tatPlaceholder {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 48px;
+  color: var(--mute);
+}
+
+.tatUpload {
+  border-style: dashed;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+.plus {
+  font-size: 36px;
+  color: var(--blood);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.plusText {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--mute);
+  line-height: 1.4;
+}
+
+/* ============ Step 3: Result ============ */
+.resultWrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.resultCard {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.resultHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+
+.resultTag {
+  color: var(--blood);
+}
+
+.resultCanvas {
+  aspect-ratio: 4/5;
+  position: relative;
+  background: var(--paper);
+}
+
+.resultCanvas img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ============ Progress ============ */
+.progress {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 14px 20px;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--blood);
+}
+
+.bar {
+  grid-column: 1 / -1;
+  height: 3px;
+  background: var(--line);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--blood), #ff5050);
+  transition: width 0.5s var(--ease-out);
+}
+
+.pct {
+  color: var(--ink);
+  font-size: 13px;
+}
+
+/* ============ Actions ============ */
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.btnGhost, .btnPrimary {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 14px 22px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.btnGhost {
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  color: var(--ink);
+}
+
+.btnGhost:hover:not(:disabled) {
+  border-color: var(--blood);
+}
+
+.btnGhost:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.btnPrimary {
+  background: var(--blood);
+  border: 1px solid var(--blood);
+  color: var(--ink);
+}
+
+.btnPrimary:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.btnPrimary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ============ Error ============ */
+.error {
+  border: 1px solid var(--blood);
+  background: rgba(214, 40, 40, 0.08);
+  color: var(--blood);
+  padding: 14px 20px;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+}
+
+@media (max-width: 720px) {
+  .frameBody { padding: 20px; }
+  .uploadGrid, .resultWrap, .configRow { grid-template-columns: 1fr; }
+  .stepper { flex-direction: column; border-radius: 12px; }
+  .step:not(:last-child) {
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+  .tatGrid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
+  .actions { flex-direction: column; gap: 14px; }
+  .actions button, .actions a { width: 100%; justify-content: center; }
+}

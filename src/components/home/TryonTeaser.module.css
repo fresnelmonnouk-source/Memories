@@ -1,0 +1,113 @@
+.teaser {
+  padding: 140px 40px;
+  border-top: 1px solid var(--line);
+  background: linear-gradient(to bottom, var(--bg), #0d0a08 50%, var(--bg));
+  position: relative;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--blood);
+  margin-bottom: 60px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.bar { width: 50px; height: 1px; background: var(--blood); }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 11vw, 150px);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  font-weight: 400;
+}
+
+.italic { font-style: italic; color: var(--blood); }
+.stroke {
+  -webkit-text-stroke: 1.5px var(--ink);
+  color: transparent;
+}
+
+.right { display: grid; gap: 50px; }
+
+.steps {
+  list-style: none;
+  display: grid;
+  gap: 30px;
+}
+
+.steps li {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 24px;
+  align-items: baseline;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 24px;
+}
+
+.num {
+  grid-row: 1 / 3;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--blood);
+  letter-spacing: 0.2em;
+}
+
+.stepTitle {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-style: italic;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+
+.stepDesc {
+  font-size: 14px;
+  line-height: 1.5;
+  opacity: 0.75;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: var(--blood);
+  color: var(--ink);
+  padding: 22px 32px;
+  border-radius: 999px;
+  width: fit-content;
+  transition: transform 0.3s var(--ease-spring);
+}
+
+.cta:hover {
+  transform: translateY(-3px);
+}
+
+.arr {
+  font-size: 20px;
+  transition: transform 0.3s;
+}
+.cta:hover .arr {
+  transform: translateX(4px);
+}
+
+@media (max-width: 880px) {
+  .teaser { padding: 80px 20px; }
+  .grid { grid-template-columns: 1fr; gap: 50px; }
+}

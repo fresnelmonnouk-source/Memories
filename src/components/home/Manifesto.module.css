@@ -1,0 +1,71 @@
+.manifesto {
+  padding: 140px 40px;
+  border-top: 1px solid var(--line);
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--blood);
+  margin-bottom: 50px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.bar {
+  width: 50px;
+  height: 1px;
+  background: var(--blood);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 0.7fr 1.3fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.quote {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-weight: 400;
+}
+
+.italic {
+  font-style: italic;
+  color: var(--blood);
+}
+
+.quote sub {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  vertical-align: super;
+  color: var(--mute);
+  text-transform: uppercase;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.body {
+  font-size: 17px;
+  line-height: 1.7;
+  opacity: 0.85;
+  max-width: 520px;
+  margin-left: auto;
+}
+.body p + p { margin-top: 24px; }
+.body em {
+  color: var(--blood);
+  font-style: italic;
+}
+
+@media (max-width: 880px) {
+  .manifesto { padding: 80px 20px; }
+  .grid { grid-template-columns: 1fr; gap: 40px; }
+  .body { margin-left: 0; }
+}
