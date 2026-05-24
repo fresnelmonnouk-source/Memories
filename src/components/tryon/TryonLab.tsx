@@ -41,6 +41,8 @@ export function TryonLab({ tattoos }: { tattoos: TattooItem[] }) {
   const [progress, setProgress] = useState(0)
   const [result, setResult] = useState<TryonResult | null>(null)
   const [error, setError] = useState<string | null>(null)
+  // Étape 3 : 'slider' = glissière avant/après interactive, 'split' = rendus seuls
+  const [compareMode, setCompareMode] = useState<'slider' | 'split'>('slider')
 
   // Identifiant de session affiché dans le header du lab.
   // Placeholder côté serveur, valeur aléatoire posée côté client après montage
@@ -286,25 +288,71 @@ export function TryonLab({ tattoos }: { tattoos: TattooItem[] }) {
 
           {/* ============ STEP 3: Result ============ */}
           {step === 3 && result && (
-            <div className={styles.resultWrap}>
-              <div className={styles.resultCard}>
-                <div className={styles.resultHead}>
-                  <span>Rendu · plan large</span>
-                  <span className={styles.resultTag}>4K · généré</span>
-                </div>
-                <div className={styles.resultCanvas}>
-                  <img src={result.resultWideUrl} alt="Rendu plan large" />
-                </div>
+            <div className={styles.resultArea}>
+              <div className={styles.baToggle}>
+                <button
+                  type="button"
+                  className={`${styles.baModeBtn} ${compareMode === 'slider' ? styles.baModeActive : ''}`}
+                  onClick={() => setCompareMode('slider')}
+                >
+                  Avant / Après
+                </button>
+                <button
+                  type="button"
+                  className={`${styles.baModeBtn} ${compareMode === 'split' ? styles.baModeActive : ''}`}
+                  onClick={() => setCompareMode('split')}
+                >
+                  Rendu seul
+                </button>
               </div>
-              <div className={styles.resultCard}>
-                <div className={styles.resultHead}>
-                  <span>Rendu · gros plan</span>
-                  <span className={styles.resultTag}>détail · zone</span>
+
+              {compareMode === 'slider' ? (
+                <div className={styles.resultWrap}>
+                  <div className={styles.resultCard}>
+                    <div className={styles.resultHead}>
+                      <span>Plan large</span>
+                      <span className={styles.resultTag}>glisse pour comparer</span>
+                    </div>
+                    <BeforeAfter
+                      before={wide?.previewUrl ?? result.resultWideUrl}
+                      after={result.resultWideUrl}
+                      label="Plan large"
+                    />
+                  </div>
+                  <div className={styles.resultCard}>
+                    <div className={styles.resultHead}>
+                      <span>Gros plan</span>
+                      <span className={styles.resultTag}>glisse pour comparer</span>
+                    </div>
+                    <BeforeAfter
+                      before={close?.previewUrl ?? result.resultCloseUrl}
+                      after={result.resultCloseUrl}
+                      label="Gros plan"
+                    />
+                  </div>
                 </div>
-                <div className={styles.resultCanvas}>
-                  <img src={result.resultCloseUrl} alt="Rendu gros plan" />
+              ) : (
+                <div className={styles.resultWrap}>
+                  <div className={styles.resultCard}>
+                    <div className={styles.resultHead}>
+                      <span>Rendu · plan large</span>
+                      <span className={styles.resultTag}>4K · généré</span>
+                    </div>
+                    <div className={styles.resultCanvas}>
+                      <img src={result.resultWideUrl} alt="Rendu plan large" />
+                    </div>
+                  </div>
+                  <div className={styles.resultCard}>
+                    <div className={styles.resultHead}>
+                      <span>Rendu · gros plan</span>
+                      <span className={styles.resultTag}>détail · zone</span>
+                    </div>
+                    <div className={styles.resultCanvas}>
+                      <img src={result.resultCloseUrl} alt="Rendu gros plan" />
+                    </div>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           )}
 
@@ -360,6 +408,41 @@ export function TryonLab({ tattoos }: { tattoos: TattooItem[] }) {
           </div>
         </div>
       </div>
+    </div>
+  )
+}
+
+// -------------- BeforeAfter slider subcomponent --------------
+// Glissière interactive : image AVANT (originale) dessous, APRÈS (rendu IA)
+// révélé par-dessus selon la position. Piloté par un <input range> couvrant
+// toute la surface → drag tactile + clic + clavier, robuste sur mobile.
+function BeforeAfter({ before, after, label }: { before: string; after: string; label: string }) {
+  const [pos, setPos] = useState(50)
+  return (
+    <div className={styles.baWrap}>
+      {/* Couche du bas : APRÈS (rendu) en plein */}
+      <img src={after} alt={`${label} — après`} className={styles.baImg} />
+      {/* Couche du haut : AVANT (original), rognée de la gauche jusqu'à pos% */}
+      <div className={styles.baClip} style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
+        <img src={before} alt={`${label} — avant`} className={styles.baImg} />
+      </div>
+
+      <span className={`${styles.baTag} ${styles.baTagBefore}`}>Avant</span>
+      <span className={`${styles.baTag} ${styles.baTagAfter}`}>Après</span>
+
+      <div className={styles.baDivider} style={{ left: `${pos}%` }}>
+        <span className={styles.baHandle}>⟷</span>
+      </div>
+
+      <input
+        type="range"
+        min={0}
+        max={100}
+        value={pos}
+        onChange={(e) => setPos(Number(e.target.value))}
+        className={styles.baRange}
+        aria-label={`Comparer avant / après — ${label}`}
+      />
     </div>
   )
 }

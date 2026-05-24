@@ -510,6 +510,138 @@
   letter-spacing: 0.1em;
 }
 
+/* ============ Before / After ============ */
+.resultArea {
+  display: grid;
+  gap: 24px;
+}
+
+.baToggle {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+}
+
+.baModeBtn {
+  background: var(--bg);
+  border: 1px solid var(--line-strong);
+  color: var(--ink);
+  padding: 10px 20px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.baModeBtn:hover { border-color: var(--blood); }
+
+.baModeActive {
+  background: var(--blood);
+  border-color: var(--blood);
+  color: var(--ink);
+}
+
+.baWrap {
+  position: relative;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  background: var(--paper);
+  user-select: none;
+  touch-action: pan-y;
+}
+
+.baImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+.baClip {
+  position: absolute;
+  inset: 0;
+}
+
+.baTag {
+  position: absolute;
+  top: 12px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: var(--bg);
+  padding: 5px 10px;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 3;
+}
+.baTagBefore { left: 12px; color: var(--ink); }
+.baTagAfter { right: 12px; color: var(--blood); }
+
+.baDivider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--blood);
+  transform: translateX(-1px);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.baHandle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--blood);
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+  font-size: 15px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Range invisible plein cadre : le pouce fait toute la hauteur à la position
+   du divider → drag tactile/souris partout, sans calcul manuel de pointeur. */
+.baRange {
+  -webkit-appearance: none;
+  appearance: none;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background: transparent;
+  cursor: ew-resize;
+  z-index: 4;
+}
+.baRange:focus-visible { outline: 2px solid var(--blood); outline-offset: 2px; }
+.baRange::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 44px;
+  height: 9999px;
+  cursor: ew-resize;
+  background: transparent;
+}
+.baRange::-moz-range-thumb {
+  width: 44px;
+  height: 9999px;
+  border: none;
+  background: transparent;
+  cursor: ew-resize;
+}
+.baRange::-moz-range-track { background: transparent; }
+
 @media (max-width: 720px) {
   .frameBody { padding: 20px; }
   .uploadGrid, .resultWrap, .configRow { grid-template-columns: 1fr; }
