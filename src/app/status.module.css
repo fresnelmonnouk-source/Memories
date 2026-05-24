@@ -1,0 +1,100 @@
+/* Pages d'état (404, erreur) — message centré, style éditorial brutaliste */
+.wrap {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 160px 24px 100px;
+  text-align: center;
+}
+
+.inner {
+  display: grid;
+  gap: 28px;
+  justify-items: center;
+  max-width: 620px;
+}
+
+.crumb {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--blood);
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+.bar { width: 50px; height: 1px; background: var(--blood); }
+
+.code {
+  font-family: var(--font-display);
+  font-size: clamp(96px, 26vw, 240px);
+  line-height: 0.8;
+  font-style: italic;
+  letter-spacing: -0.05em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--line-strong);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 7vw, 72px);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  font-weight: 400;
+}
+.italic { font-style: italic; color: var(--blood); }
+
+.text {
+  font-size: 16px;
+  line-height: 1.65;
+  opacity: 0.8;
+  max-width: 480px;
+}
+
+.ref {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.primary,
+.ghost {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 15px 26px;
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.25s var(--ease-out);
+}
+
+.primary {
+  background: var(--blood);
+  color: var(--ink);
+  border: 1px solid var(--blood);
+}
+.primary:hover { transform: translateY(-2px); }
+.primary span { transition: transform 0.25s var(--ease-out); }
+.primary:hover span { transform: translateX(4px); }
+
+.ghost {
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  color: var(--ink);
+}
+.ghost:hover { border-color: var(--blood); color: var(--blood); }
