@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next'
+import { getSiteUrl } from '@/lib/utils'
 import { Marquee } from '@/components/ui/Marquee'
 import { Nav } from '@/components/ui/Nav'
 import { Footer } from '@/components/ui/Footer'
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
   title: 'Memories° — Atelier de tatouage · Essaie avant d\'oser',
   description:
     'Studio de tatouage Memories. Essaie virtuellement ton tatouage grâce à notre IA avant même de prendre rendez-vous. Plan large, gros plan, sur ton corps.',
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'),
+  metadataBase: new URL(getSiteUrl()),
   openGraph: {
     title: 'Memories° — L\'encre ne se reprend pas. Le pixel, si.',
     description: 'Essaie ton tatouage en IA avant de prendre rendez-vous.',

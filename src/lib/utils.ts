@@ -61,6 +61,23 @@ export function formatPrice(eur: number | null | undefined): string {
   }).format(eur)
 }
 
+/**
+ * URL absolue du site, normalisée et sûre pour `new URL()`.
+ * Tolère une variable d'env SANS schéma (ex: Vercel injecte parfois
+ * "mon-site.vercel.app") en préfixant https://. Retombe sur localhost
+ * si absente ou invalide — un mauvais réglage ne doit JAMAIS casser le build.
+ */
+export function getSiteUrl(): string {
+  const raw = process.env.NEXT_PUBLIC_APP_URL?.trim()
+  if (!raw) return 'http://localhost:3000'
+  const withScheme = /^https?:\/\//i.test(raw) ? raw : `https://${raw}`
+  try {
+    return new URL(withScheme).origin
+  } catch {
+    return 'http://localhost:3000'
+  }
+}
+
 /** Récupère l'IP client depuis les headers de Next.js */
 export function getClientIp(headers: Headers): string {
   return (

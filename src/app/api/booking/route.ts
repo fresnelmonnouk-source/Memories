@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { sendBookingEmails } from '@/lib/resend'
-import { getClientIp, BODY_ZONE_LABELS } from '@/lib/utils'
+import { getClientIp, BODY_ZONE_LABELS, getSiteUrl } from '@/lib/utils'
 import { z } from 'zod'
 import type { BodyZone } from '@/types/database'
 
@@ -76,8 +76,7 @@ export async function POST(req: NextRequest) {
         .eq('id', data.tryoutId)
         .single()
       if (tryout) {
-        const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? ''
-        tryoutLink = `${appUrl}/essayage/${tryout.session_token}`
+        tryoutLink = `${getSiteUrl()}/essayage/${tryout.session_token}`
       }
     }
 
