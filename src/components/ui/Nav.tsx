@@ -9,8 +9,9 @@ const LINKS = [
   { href: '/essayage',      label: 'Essayage',     num: '01' },
   { href: '/catalogue',     label: 'Catalogue',    num: '02' },
   { href: '/realisations',  label: 'Réalisations', num: '03' },
-  { href: '/artistes',      label: 'Artistes',     num: '04' },
-  { href: '/a-propos',      label: 'À propos',     num: '05' },
+  { href: '/journal',       label: 'Journal',      num: '04' },
+  { href: '/communaute',    label: 'Communauté',   num: '05' },
+  { href: '/a-propos',      label: "L'atelier",    num: '06' },
 ] as const
 
 export function Nav() {
@@ -66,7 +67,7 @@ export function Nav() {
           ))}
           <li>
             <Link href="/compte" onClick={() => setOpen(false)}>
-              <span className={styles.mNum}>06</span>
+              <span className={styles.mNum}>07</span>
               Compte
             </Link>
           </li>

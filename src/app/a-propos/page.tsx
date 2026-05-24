@@ -1,11 +1,21 @@
+import Link from 'next/link'
+import { createClient } from '@/lib/supabase/server'
+import { TATTOO_STYLE_LABELS } from '@/lib/utils'
 import styles from './page.module.css'
 
 export const metadata = {
-  title: 'À propos — Memories°',
-  description: 'L\'atelier Memories. Notre vision, nos soins, nos tarifs.',
+  title: 'L\'atelier — Memories°',
+  description: 'L\'atelier Memories : nos artistes, notre vision, nos soins, nos tarifs.',
 }
 
-export default function AProposPage() {
+export default async function AProposPage() {
+  const supabase = await createClient()
+  const { data: artists } = await supabase
+    .from('artists')
+    .select('*')
+    .eq('is_active', true)
+    .order('display_order')
+
   return (
     <div className={styles.page}>
       <header className={styles.header}>
@@ -19,6 +29,37 @@ export default function AProposPage() {
           Pas des modes.
         </h1>
       </header>
+
+      {/* Artistes (fusion avec l'ancienne page Artistes) */}
+      <section className={styles.section} id="artistes">
+        <div className={styles.label}>00 · Nos artistes</div>
+        <div className={styles.body}>
+          <div className={styles.artists}>
+            {artists?.map((a) => (
+              <article key={a.id} className={styles.artist}>
+                <div className={styles.artistPortrait}>
+                  {a.portrait_url
+                    ? <img src={a.portrait_url} alt={a.name} />
+                    : <span>{a.name.split(' ').map((n) => n[0]).join('')}</span>}
+                </div>
+                <div>
+                  <h3 className={styles.artistName}>{a.name}</h3>
+                  <div className={styles.artistStyles}>
+                    {a.styles?.map((s) => <span key={s}>{TATTOO_STYLE_LABELS[s]}</span>)}
+                  </div>
+                  {a.bio && <p className={styles.artistBio}>{a.bio}</p>}
+                  <Link href={`/reservation?artist=${a.id}`} className={styles.artistCta}>
+                    Réserver avec {a.name.split(' ')[0]} →
+                  </Link>
+                </div>
+              </article>
+            ))}
+            {(!artists || artists.length === 0) && (
+              <p className={styles.artistBio}>L&apos;équipe se constitue. Reviens vite.</p>
+            )}
+          </div>
+        </div>
+      </section>
 
       {/* Manifesto */}
       <section className={styles.section}>

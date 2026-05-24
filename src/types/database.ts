@@ -119,6 +119,27 @@ export type RateLimit = {
   blocked_until: string | null
 }
 
+export type CommunityPost = {
+  id: string
+  author_id: string | null
+  author_name: string
+  body: string
+  created_at: string
+}
+
+export type BlogPost = {
+  id: string
+  slug: string
+  title: string
+  excerpt: string | null
+  body: string
+  cover_url: string | null
+  is_published: boolean
+  published_at: string | null
+  created_at: string
+  updated_at: string
+}
+
 export type UserRole = 'client' | 'admin'
 
 export type Profile = {
@@ -144,7 +165,9 @@ export interface Database {
       tryouts:      { Row: Tryout;      Insert: Partial<Tryout>;      Update: Partial<Tryout>;      Relationships: [] }
       bookings:     { Row: Booking;     Insert: Partial<Booking>;     Update: Partial<Booking>;     Relationships: [] }
       rate_limits:  { Row: RateLimit;   Insert: Partial<RateLimit>;   Update: Partial<RateLimit>;   Relationships: [] }
-      profiles:     { Row: Profile;     Insert: Partial<Profile>;     Update: Partial<Profile>;     Relationships: [] }
+      profiles:        { Row: Profile;        Insert: Partial<Profile>;        Update: Partial<Profile>;        Relationships: [] }
+      community_posts: { Row: CommunityPost;  Insert: Partial<CommunityPost>;  Update: Partial<CommunityPost>;  Relationships: [] }
+      blog_posts:      { Row: BlogPost;       Insert: Partial<BlogPost>;       Update: Partial<BlogPost>;       Relationships: [] }
     }
     Views: { [_ in never]: never }
     Functions: {

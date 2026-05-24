@@ -7,15 +7,15 @@ export const metadata = {
   robots: { index: false },
 }
 
-// Modules du back office — câblés au fil des sprints suivants.
-const MODULES = [
-  'Catalogue',
-  'Artistes',
-  'Réalisations',
-  'Réservations',
-  'Mini-blog',
-  'Communauté',
-  'Contenu légal',
+// Modules du back office — ceux avec href sont actifs, les autres arrivent.
+const MODULES: { name: string; href?: string }[] = [
+  { name: 'Mini-blog', href: '/admin/journal' },
+  { name: 'Communauté', href: '/communaute' },
+  { name: 'Catalogue' },
+  { name: 'Artistes' },
+  { name: 'Réalisations' },
+  { name: 'Réservations' },
+  { name: 'Contenu légal' },
 ]
 
 export default async function AdminPage() {
@@ -30,12 +30,19 @@ export default async function AdminPage() {
       <p className={styles.sub}>Connecté en tant qu&apos;administrateur · {profile.email}</p>
 
       <div className={styles.modules}>
-        {MODULES.map((m) => (
-          <div key={m} className={styles.module}>
-            <span className={styles.moduleName}>{m}</span>
-            <span className={styles.soon}>à venir</span>
-          </div>
-        ))}
+        {MODULES.map((m) =>
+          m.href ? (
+            <Link key={m.name} href={m.href} className={styles.module}>
+              <span className={styles.moduleName}>{m.name}</span>
+              <span className={styles.soon} style={{ color: 'var(--blood)' }}>gérer →</span>
+            </Link>
+          ) : (
+            <div key={m.name} className={styles.module}>
+              <span className={styles.moduleName}>{m.name}</span>
+              <span className={styles.soon}>à venir</span>
+            </div>
+          ),
+        )}
       </div>
 
       <div className={styles.actions}>

@@ -13,8 +13,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/essayage',     changeFrequency: 'monthly', priority: 0.9 },
     { path: '/catalogue',    changeFrequency: 'weekly',  priority: 0.8 },
     { path: '/realisations', changeFrequency: 'weekly',  priority: 0.7 },
-    { path: '/artistes',     changeFrequency: 'monthly', priority: 0.6 },
-    { path: '/a-propos',     changeFrequency: 'monthly', priority: 0.5 },
+    { path: '/journal',      changeFrequency: 'weekly',  priority: 0.7 },
+    { path: '/communaute',   changeFrequency: 'daily',   priority: 0.6 },
+    { path: '/a-propos',     changeFrequency: 'monthly', priority: 0.6 },
     { path: '/reservation',  changeFrequency: 'monthly', priority: 0.6 },
   ]
 

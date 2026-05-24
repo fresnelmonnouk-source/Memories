@@ -20,8 +20,9 @@ export function Footer() {
           <Link href="/essayage">Essayage IA</Link>
           <Link href="/catalogue">Catalogue</Link>
           <Link href="/realisations">Réalisations</Link>
-          <Link href="/artistes">Artistes</Link>
-          <Link href="/a-propos">À propos</Link>
+          <Link href="/journal">Journal</Link>
+          <Link href="/communaute">Communauté</Link>
+          <Link href="/a-propos">L&apos;atelier</Link>
           <Link href="/reservation">Réserver</Link>
         </div>
         <div className={styles.col}>

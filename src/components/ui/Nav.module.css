@@ -174,7 +174,8 @@
   color: var(--blood);
 }
 
-@media (max-width: 880px) {
+/* 7 entrées de menu → burger plus tôt (1024px) pour éviter le tassement. */
+@media (max-width: 1024px) {
   .nav { padding: 14px 20px; }
   .links { display: none; }
   .burger { display: block; }

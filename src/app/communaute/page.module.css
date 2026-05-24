@@ -1,0 +1,129 @@
+.page {
+  min-height: 100vh;
+  padding: 150px 24px 100px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.crumb {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--blood);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.bar { width: 40px; height: 1px; background: var(--blood); }
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 9vw, 92px);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  font-weight: 400;
+  margin-bottom: 14px;
+}
+.italic { font-style: italic; color: var(--blood); }
+.intro { font-size: 16px; line-height: 1.6; opacity: 0.82; max-width: 540px; margin-bottom: 40px; }
+
+/* Formulaire */
+.composer {
+  border: 1px solid var(--line-strong);
+  border-radius: 14px;
+  background: var(--paper);
+  padding: 20px;
+  display: grid;
+  gap: 14px;
+  margin-bottom: 40px;
+}
+.composer textarea {
+  background: var(--bg);
+  border: 1px solid var(--line-strong);
+  color: var(--ink);
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  resize: vertical;
+  min-height: 90px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.composer textarea:focus { border-color: var(--blood); }
+.composerFoot { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.hint { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mute); }
+
+.submit {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: var(--blood);
+  color: var(--ink);
+  border: none;
+  padding: 13px 24px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.2s var(--ease-spring);
+}
+.submit:hover { transform: translateY(-2px); }
+
+.loginCta {
+  border: 1px dashed var(--line-strong);
+  border-radius: 14px;
+  padding: 22px;
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 15px;
+  opacity: 0.9;
+}
+.loginCta a { color: var(--blood); border-bottom: 1px solid var(--blood); }
+
+/* Liste */
+.feed { display: grid; gap: 16px; }
+.post {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--paper);
+  padding: 20px;
+  position: relative;
+}
+.postHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.author { font-family: var(--font-display); font-style: italic; font-size: 20px; letter-spacing: -0.01em; }
+.date { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mute); }
+.body { font-size: 15px; line-height: 1.6; white-space: pre-wrap; word-wrap: break-word; opacity: 0.92; }
+
+.del {
+  background: none;
+  border: 1px solid var(--line-strong);
+  color: var(--mute);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 5px 9px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.del:hover { border-color: var(--blood); color: var(--blood); }
+
+.empty {
+  text-align: center;
+  padding: 50px 20px;
+  color: var(--mute);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
