@@ -1,7 +1,11 @@
 import Link from 'next/link'
+import { getContentMap, parseLines, parsePipes } from '@/lib/content'
 import styles from './Footer.module.css'
 
-export function Footer() {
+export async function Footer() {
+  const map = await getContentMap(['footer_address', 'footer_socials'])
+  const address = parseLines(map.footer_address)
+  const socials = parsePipes(map.footer_socials)
   return (
     <footer className={styles.footer}>
       <h2 className={styles.mega}>
@@ -12,8 +16,7 @@ export function Footer() {
       <div className={styles.grid}>
         <div className={styles.col}>
           <h4>L&apos;atelier</h4>
-          <p className={styles.big}>14, rue des Bains<br />Lomé · Maritime</p>
-          <p style={{ marginTop: 14 }}>Quartier Adidogomé<br />Togo</p>
+          {address.map((line, i) => <p key={i} className={i === 0 ? styles.big : undefined}>{line}</p>)}
         </div>
         <div className={styles.col}>
           <h4>Navigation</h4>
@@ -35,10 +38,9 @@ export function Footer() {
         </div>
         <div className={styles.col}>
           <h4>Suivre</h4>
-          <a href="https://instagram.com" target="_blank" rel="noopener">Instagram ↗</a>
-          <a href="https://tiktok.com" target="_blank" rel="noopener">TikTok ↗</a>
-          <a href="https://behance.net" target="_blank" rel="noopener">Behance ↗</a>
-          <a href="#newsletter">Newsletter ↗</a>
+          {socials.map((s, i) => (
+            <a key={i} href={s[1] ?? '#'} target="_blank" rel="noopener">{s[0]} ↗</a>
+          ))}
         </div>
       </div>
 

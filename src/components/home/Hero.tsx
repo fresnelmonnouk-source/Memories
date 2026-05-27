@@ -1,8 +1,13 @@
 import Link from 'next/link'
 import { HeroDemo } from './HeroDemo'
+import { getContentMap, parseLines, parsePipes } from '@/lib/content'
 import styles from './Hero.module.css'
 
-export function Hero() {
+export async function Hero() {
+  const map = await getContentMap(['home_hero_title', 'home_hero_desc', 'home_hero_cta', 'home_hero_stat'])
+  const titleLines = parseLines(map.home_hero_title)
+  const stat = parsePipes(map.home_hero_stat)[0] ?? ['98%', 'de fidélité au rendu final']
+
   return (
     <section className={styles.hero}>
       <div className={`${styles.crosshair} ${styles.tl}`} />
@@ -16,27 +21,25 @@ export function Hero() {
 
       <div className={styles.stage}>
         <h1 className={styles.title}>
-          <span className={styles.line}>Essaie</span>
-          <span className={styles.line}><span className={styles.italic}>avant</span></span>
-          <span className={styles.line}>d&apos;oser<span style={{ color: 'var(--blood)' }}>.</span></span>
+          {titleLines.map((line, i) => (
+            <span key={i} className={styles.line}>
+              {i === 1 ? <span className={styles.italic}>{line}</span> : line}
+            </span>
+          ))}
         </h1>
 
         <HeroDemo />
       </div>
 
       <div className={styles.bottom}>
-        <div className={styles.desc}>
-          Un tatouage est une décision <strong>permanente</strong>. Notre IA te
-          laisse le porter sur ta peau, en photo, avant même de pousser la porte
-          de l&apos;atelier. Photographie · Sélectionne · Visualise. L&apos;encre attendra.
-        </div>
+        <div className={styles.desc}>{map.home_hero_desc}</div>
         <Link href="/essayage" className={styles.cta}>
           <span className={styles.arrow}>→</span>
-          Lancer l&apos;essayage
+          {map.home_hero_cta}
         </Link>
         <div className={styles.stats}>
-          <span className={styles.num}>98<span style={{ fontSize: 30 }}>%</span></span>
-          <span className={styles.label}>de fidélité<br />au rendu final</span>
+          <span className={styles.num}>{stat[0]}</span>
+          <span className={styles.label}>{stat[1]}</span>
         </div>
       </div>
     </section>

@@ -1,15 +1,11 @@
+import { getContentMap, parseLines } from '@/lib/content'
 import styles from './Marquee.module.css'
 
-const ITEMS = [
-  'Atelier ouvert mar—sam · 11h—20h',
-  'Essayage IA disponible 24/7',
-  'Première consultation gratuite',
-  'Prends rendez-vous · 48h de délai',
-]
-
-export function Marquee() {
+export async function Marquee() {
+  const map = await getContentMap(['marquee_items'])
+  const items = parseLines(map.marquee_items)
   // Dupliqué pour boucle fluide
-  const all = [...ITEMS, ...ITEMS, ...ITEMS, ...ITEMS]
+  const all = [...items, ...items, ...items, ...items]
 
   return (
     <div className={styles.marquee}>
