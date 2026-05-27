@@ -43,6 +43,8 @@ export function TryonLab({ tattoos }: { tattoos: TattooItem[] }) {
   const [error, setError] = useState<string | null>(null)
   // Étape 3 : 'slider' = glissière avant/après interactive, 'split' = rendus seuls
   const [compareMode, setCompareMode] = useState<'slider' | 'split'>('slider')
+  // Gating freemium : 'account' = compte requis, 'subscription' = abonnement requis
+  const [gate, setGate] = useState<'account' | 'subscription' | null>(null)
 
   // Identifiant de session affiché dans le header du lab.
   // Placeholder côté serveur, valeur aléatoire posée côté client après montage
@@ -123,6 +125,7 @@ export function TryonLab({ tattoos }: { tattoos: TattooItem[] }) {
     setGenerating(true)
     setProgress(0)
     setError(null)
+    setGate(null)
 
     // Fake progress while generating (Gemini = 15-30s)
     const interval = setInterval(() => {
@@ -147,6 +150,8 @@ export function TryonLab({ tattoos }: { tattoos: TattooItem[] }) {
       setProgress(100)
 
       if (!res.ok) {
+        if (data.code === 'ACCOUNT_REQUIRED') setGate('account')
+        else if (data.code === 'SUBSCRIPTION_REQUIRED') setGate('subscription')
         setError(data.error || 'Génération échouée')
         return
       }
@@ -218,6 +223,20 @@ export function TryonLab({ tattoos }: { tattoos: TattooItem[] }) {
       {error && (
         <div className={styles.error}>
           ✕ {error}
+        </div>
+      )}
+
+      {gate === 'account' && (
+        <div className={styles.gate}>
+          <a href="/inscription" className={styles.gatePrimary}>Créer un compte gratuit →</a>
+          <a href="/connexion?next=/essayage" className={styles.gateLink}>J&apos;ai déjà un compte</a>
+        </div>
+      )}
+      {gate === 'subscription' && (
+        <div className={styles.gate}>
+          <span className={styles.gateText}>
+            L&apos;abonnement <strong>4 €/mois</strong> arrive très bientôt pour essayer sans limite.
+          </span>
         </div>
       )}
 

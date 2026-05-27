@@ -66,6 +66,7 @@ export type Realisation = {
 export type Tryout = {
   id: string
   session_token: string
+  user_id: string | null
   body_wide_path: string | null
   body_close_path: string | null
   tattoo_id: string | null
@@ -114,6 +115,7 @@ export type RateLimit = {
   ip_address: string
   tryout_count: number
   upload_count: number
+  lifetime_tryout_count: number
   first_seen_at: string
   last_seen_at: string
   blocked_until: string | null
@@ -173,6 +175,7 @@ export interface Database {
     Functions: {
       cleanup_expired_tryouts: { Args: Record<PropertyKey, never>; Returns: number }
       bump_rate_limit: { Args: { p_ip: string; p_kind: string }; Returns: undefined }
+      bump_lifetime_tryout: { Args: { p_ip: string }; Returns: undefined }
     }
     Enums: {
       tattoo_style: TattooStyle

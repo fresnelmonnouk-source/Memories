@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase/admin'
+import { createClient } from '@/lib/supabase/server'
 import { generateTryoutWithFallback } from '@/lib/tryout/generate'
 import { GEMINI_IMAGE_MODEL } from '@/lib/gemini/client'
 import { OPENAI_IMAGE_MODEL } from '@/lib/openai/client'
@@ -24,6 +25,11 @@ const tryoutSchema = z.object({
 })
 
 const DAILY_TRYOUT_LIMIT = 10
+
+// Freemium : 1 essai gratuit/appareil (IP) sans compte, puis 2 essais
+// gratuits une fois le compte créé, puis abonnement (Stripe — sprint suivant).
+const FREE_ANON_TRYOUTS = 1
+const FREE_ACCOUNT_TRYOUTS = 2
 
 /**
  * POST /api/tryout
@@ -57,7 +63,7 @@ export async function POST(req: NextRequest) {
     // ============ Rate limit (par jour, UTC) ============
     const { data: rl } = await supabase
       .from('rate_limits')
-      .select('tryout_count, blocked_until, last_seen_at')
+      .select('tryout_count, blocked_until, last_seen_at, lifetime_tryout_count')
       .eq('ip_address', ip)
       .maybeSingle()
 
@@ -71,6 +77,42 @@ export async function POST(req: NextRequest) {
         { error: `Tu as atteint la limite quotidienne de ${DAILY_TRYOUT_LIMIT} essayages.` },
         { status: 429 },
       )
+    }
+
+    // ============ Gating freemium ============
+    const ssr = await createClient()
+    const { data: { user } } = await ssr.auth.getUser()
+
+    let accountUsed = 0
+    let subscribed = false
+    if (user) {
+      const { data: prof } = await supabase
+        .from('profiles')
+        .select('account_tryouts_used, subscription_status')
+        .eq('id', user.id)
+        .maybeSingle()
+      accountUsed = prof?.account_tryouts_used ?? 0
+      subscribed = prof?.subscription_status === 'active'
+      if (!subscribed && accountUsed >= FREE_ACCOUNT_TRYOUTS) {
+        return NextResponse.json(
+          {
+            error: 'Tu as utilisé tes essais gratuits. Un abonnement (4 €/mois) arrive très bientôt pour continuer à essayer sans limite.',
+            code: 'SUBSCRIPTION_REQUIRED',
+          },
+          { status: 402 },
+        )
+      }
+    } else {
+      const lifetime = rl?.lifetime_tryout_count ?? 0
+      if (lifetime >= FREE_ANON_TRYOUTS) {
+        return NextResponse.json(
+          {
+            error: 'Tu as utilisé ton essai gratuit. Crée un compte pour débloquer 2 essais gratuits de plus.',
+            code: 'ACCOUNT_REQUIRED',
+          },
+          { status: 401 },
+        )
+      }
     }
 
     // ============ Créer la session tryout ============
@@ -96,6 +138,12 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Création session échouée' }, { status: 500 })
     }
     tryoutId = tryout.id
+
+    // Lien au compte en best-effort (n'échoue pas la génération si la colonne
+    // user_id n'existe pas encore — déploiement sûr avant migration freemium.sql).
+    if (user) {
+      await supabase.from('tryouts').update({ user_id: user.id }).eq('id', tryout.id)
+    }
 
     // Compte la tentative dès maintenant : toute génération lancée est comptée
     // (anti-abus : un échec ne donne pas un nombre illimité de retries gratuits).
@@ -182,6 +230,18 @@ export async function POST(req: NextRequest) {
         completed_at: new Date().toISOString(),
       })
       .eq('id', tryout.id)
+
+    // ============ Consommer le quota freemium (succès uniquement) ============
+    if (user) {
+      if (!subscribed) {
+        await supabase
+          .from('profiles')
+          .update({ account_tryouts_used: accountUsed + 1 })
+          .eq('id', user.id)
+      }
+    } else {
+      await supabase.rpc('bump_lifetime_tryout', { p_ip: ip })
+    }
 
     // ============ Signed URLs pour le client ============
     const [signedWide, signedClose] = await Promise.all([

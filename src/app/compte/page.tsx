@@ -35,7 +35,7 @@ export default async function ComptePage() {
   const { data: tryouts, count } = await admin
     .from('tryouts')
     .select('session_token, status, created_at', { count: 'exact' })
-    .eq('email', user.email ?? '___none___')
+    .eq('user_id', user.id)
     .order('created_at', { ascending: false })
     .limit(6)
 

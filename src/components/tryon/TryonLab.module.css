@@ -510,6 +510,41 @@
   letter-spacing: 0.1em;
 }
 
+/* ============ Gating freemium ============ */
+.gate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background: var(--paper);
+  padding: 24px;
+}
+.gatePrimary {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: var(--blood);
+  color: var(--ink);
+  padding: 14px 26px;
+  border-radius: 999px;
+  transition: transform 0.2s var(--ease-spring);
+}
+.gatePrimary:hover { transform: translateY(-2px); }
+.gateLink {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+.gateLink:hover { color: var(--blood); }
+.gateText { font-size: 15px; line-height: 1.5; opacity: 0.9; }
+.gateText strong { color: var(--blood); }
+
 /* ============ Before / After ============ */
 .resultArea {
   display: grid;
@@ -549,6 +584,7 @@
   aspect-ratio: 4/5;
   overflow: hidden;
   background: var(--paper);
+  -webkit-user-select: none;
   user-select: none;
   touch-action: pan-y;
 }
