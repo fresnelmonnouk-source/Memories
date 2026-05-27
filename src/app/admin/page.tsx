@@ -13,6 +13,7 @@ const MODULES: { name: string; href?: string; note: string }[] = [
   { name: 'Réalisations', href: '/admin/realisations', note: 'gérer →' },
   { name: 'Mini-blog', href: '/admin/journal', note: 'gérer →' },
   { name: 'Communauté', href: '/communaute', note: 'modérer →' },
+  { name: 'Contenu du site', href: '/admin/contenu', note: 'éditer →' },
   { name: 'Contenu légal', href: '/admin/legal', note: 'éditer →' },
 ]
 
