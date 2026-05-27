@@ -21,7 +21,23 @@
   outline: none;
   transition: border-color 0.2s;
 }
-.input:focus, .select:focus { border-color: var(--blood); }
+.input:focus, .select:focus, .textarea:focus { border-color: var(--blood); }
+.textarea {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--line-strong);
+  color: var(--ink);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  outline: none;
+  resize: vertical;
+  min-height: 110px;
+  transition: border-color 0.2s;
+}
+.styleChecks { display: flex; flex-wrap: wrap; gap: 8px 16px; }
 .checks { display: flex; gap: 22px; flex-wrap: wrap; }
 .check { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; cursor: pointer; }
 .check input { width: 17px; height: 17px; accent-color: var(--blood); cursor: pointer; }

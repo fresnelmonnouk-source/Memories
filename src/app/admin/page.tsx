@@ -9,10 +9,10 @@ export const dynamic = 'force-dynamic'
 const MODULES: { name: string; href?: string; note: string }[] = [
   { name: 'Catalogue', href: '/admin/catalogue', note: 'gérer →' },
   { name: 'Réservations', href: '/admin/reservations', note: 'gérer →' },
+  { name: 'Artistes', href: '/admin/artistes', note: 'gérer →' },
+  { name: 'Réalisations', href: '/admin/realisations', note: 'gérer →' },
   { name: 'Mini-blog', href: '/admin/journal', note: 'gérer →' },
   { name: 'Communauté', href: '/communaute', note: 'modérer →' },
-  { name: 'Artistes', note: 'à venir' },
-  { name: 'Réalisations', note: 'à venir' },
   { name: 'Contenu légal', note: 'à venir' },
 ]
 
