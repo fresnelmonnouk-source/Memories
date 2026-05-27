@@ -1,7 +1,9 @@
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { getUser, getProfile } from '@/lib/auth'
-import { addCommunityPost, deleteCommunityPost } from './actions'
+import { approveCommunityPost, deleteCommunityPost } from './actions'
+import { CommunityComposer } from './CommunityComposer'
 import styles from './page.module.css'
 
 export const metadata = {
@@ -16,16 +18,17 @@ function frDate(iso: string) {
 }
 
 export default async function CommunautePage() {
-  const supabase = await createClient()
-  const { data: posts } = await supabase
+  const user = await getUser()
+  const profile = user ? await getProfile() : null
+  const isAdmin = profile?.role === 'admin'
+
+  // Admin : voit tout (y compris flagged) via service_role. Public : RLS = approved only.
+  const db = isAdmin ? createAdminClient() : await createClient()
+  const { data: posts } = await db
     .from('community_posts')
     .select('*')
     .order('created_at', { ascending: false })
     .limit(100)
-
-  const user = await getUser()
-  const profile = user ? await getProfile() : null
-  const isAdmin = profile?.role === 'admin'
 
   return (
     <div className={styles.page}>
@@ -37,13 +40,7 @@ export default async function CommunautePage() {
       </p>
 
       {user ? (
-        <form action={addCommunityPost} className={styles.composer}>
-          <textarea name="body" placeholder="Raconte l'histoire de ton tatouage…" maxLength={2000} required />
-          <div className={styles.composerFoot}>
-            <span className={styles.hint}>Public · 2000 caractères max</span>
-            <button type="submit" className={styles.submit}>Publier</button>
-          </div>
-        </form>
+        <CommunityComposer />
       ) : (
         <div className={styles.loginCta}>
           <Link href="/connexion?next=/communaute">Connecte-toi</Link> ou{' '}
@@ -53,17 +50,26 @@ export default async function CommunautePage() {
 
       <div className={styles.feed}>
         {posts?.map((p) => (
-          <article key={p.id} className={styles.post}>
+          <article key={p.id} className={`${styles.post} ${p.status === 'flagged' ? styles.postFlagged : ''}`}>
             <div className={styles.postHead}>
               <span className={styles.author}>{p.author_name}</span>
               <span className={styles.date}>{frDate(p.created_at)}</span>
             </div>
             <p className={styles.body}>{p.body}</p>
             {isAdmin && (
-              <form action={deleteCommunityPost} style={{ marginTop: 12 }}>
-                <input type="hidden" name="id" value={p.id} />
-                <button type="submit" className={styles.del}>Supprimer</button>
-              </form>
+              <div className={styles.modRow}>
+                {p.status === 'flagged' && <span className={styles.flaggedBadge}>à valider</span>}
+                {p.status === 'flagged' && (
+                  <form action={approveCommunityPost}>
+                    <input type="hidden" name="id" value={p.id} />
+                    <button type="submit" className={styles.approve}>Approuver</button>
+                  </form>
+                )}
+                <form action={deleteCommunityPost}>
+                  <input type="hidden" name="id" value={p.id} />
+                  <button type="submit" className={styles.del}>Supprimer</button>
+                </form>
+              </div>
             )}
           </article>
         ))}

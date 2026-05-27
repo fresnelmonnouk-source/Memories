@@ -127,3 +127,26 @@
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }
+
+/* Feedback du composer */
+.modError, .modOk {
+  font-size: 13px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  line-height: 1.4;
+}
+.modError { color: var(--blood); border: 1px solid var(--blood); background: rgba(214, 40, 40, 0.08); }
+.modOk { color: #0a7d2c; border: 1px solid #0a7d2c; background: rgba(10, 125, 44, 0.08); }
+
+/* Modération admin */
+.postFlagged { border-color: var(--blood); border-style: dashed; }
+.modRow { display: flex; align-items: center; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+.flaggedBadge {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--blood); border: 1px solid var(--blood); padding: 4px 9px; border-radius: 4px;
+}
+.approve {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase;
+  background: #0a7d2c; color: var(--ink); border: none; padding: 6px 12px; border-radius: 999px; cursor: pointer;
+}
+.approve:hover { opacity: 0.85; }

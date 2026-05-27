@@ -126,6 +126,7 @@ export type CommunityPost = {
   author_id: string | null
   author_name: string
   body: string
+  status: 'approved' | 'flagged'
   created_at: string
 }
 
