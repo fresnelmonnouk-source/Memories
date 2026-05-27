@@ -14,6 +14,8 @@ interface BookingEmailParams {
   projectDescription?: string
   tryoutLink?: string
   bookingId: string
+  attachments?: { filename: string; content: Buffer }[]
+  photosJoined?: boolean
 }
 
 /**
@@ -62,6 +64,9 @@ export async function sendBookingEmails(p: BookingEmailParams) {
       </ul>
       ${p.projectDescription ? `<p><strong>Projet :</strong><br>${p.projectDescription}</p>` : ''}
       ${p.tryoutLink ? `<p><a href="${p.tryoutLink}">→ Essayage IA du client</a></p>` : ''}
+      ${p.photosJoined
+        ? `<p style="color:#0a7d2c;">📎 Photo originale + rendu IA en pièces jointes (consentement client).</p>`
+        : p.tryoutLink ? `<p style="color:#6b6660;">Le client n'a pas autorisé l'envoi des photos (lien essayage seulement).</p>` : ''}
     </div>
   `
 
@@ -78,6 +83,7 @@ export async function sendBookingEmails(p: BookingEmailParams) {
         to: studioEmail,
         subject: `Nouvelle réservation — ${p.firstName} ${p.lastName}`,
         html: studioHtml,
+        ...(p.attachments && p.attachments.length > 0 ? { attachments: p.attachments } : {}),
       }),
     ])
     return { ok: true, clientEmail, studioEmail: studioEmailRes }

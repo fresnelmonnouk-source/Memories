@@ -34,6 +34,7 @@ export function BookingForm({
     preferredArtistId: preselectedArtistId ?? '',
     bodyZone: '' as BodyZone | '',
     projectDescription: '',
+    photoConsent: false,
   })
 
   const update = <K extends keyof typeof form>(k: K, v: typeof form[K]) =>
@@ -53,6 +54,7 @@ export function BookingForm({
           preferredArtistId: form.preferredArtistId || null,
           bodyZone: form.bodyZone || null,
           tryoutId: tryoutId || null,
+          photoConsent: form.photoConsent,
         }),
       })
       const data = await res.json()
@@ -164,6 +166,21 @@ export function BookingForm({
           placeholder="Style envisagé, taille approximative, références, contraintes (allergies, peau sensible)..."
         />
       </Field>
+
+      {tryoutId && (
+        <label className={styles.consent}>
+          <input
+            type="checkbox"
+            checked={form.photoConsent}
+            onChange={(e) => update('photoConsent', e.target.checked)}
+          />
+          <span>
+            J&apos;autorise l&apos;envoi de <strong>ma photo originale</strong> et du
+            {' '}<strong>rendu généré</strong> à l&apos;atelier Memories pour préparer ma
+            séance. Sans ça, l&apos;atelier ne reçoit que le lien de l&apos;essayage.
+          </span>
+        </label>
+      )}
 
       <button type="submit" className={styles.submit} disabled={submitting}>
         {submitting ? 'Envoi en cours...' : 'Envoyer ma demande'}
