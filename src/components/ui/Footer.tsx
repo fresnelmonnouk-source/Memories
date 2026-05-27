@@ -30,7 +30,8 @@ export function Footer() {
           <Link href="/a-propos#soins">Soins post-tatouage</Link>
           <Link href="/a-propos#tarifs">Tarifs</Link>
           <Link href="/a-propos#faq">FAQ</Link>
-          <Link href="/a-propos#mentions">Mentions légales</Link>
+          <Link href="/legal/mentions-legales">Mentions légales</Link>
+          <Link href="/legal/confidentialite">Confidentialité</Link>
         </div>
         <div className={styles.col}>
           <h4>Suivre</h4>
@@ -44,7 +45,7 @@ export function Footer() {
       <div className={styles.bottom}>
         <span>© {new Date().getFullYear()} Memories Atelier · Tous droits réservés</span>
         <span className={styles.star}>✦ Designed in ink &amp; pixels ✦</span>
-        <span>CGV · Cookies</span>
+        <Link href="/legal/cgv">CGV</Link>
       </div>
     </footer>
   )

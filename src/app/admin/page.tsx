@@ -13,7 +13,7 @@ const MODULES: { name: string; href?: string; note: string }[] = [
   { name: 'Réalisations', href: '/admin/realisations', note: 'gérer →' },
   { name: 'Mini-blog', href: '/admin/journal', note: 'gérer →' },
   { name: 'Communauté', href: '/communaute', note: 'modérer →' },
-  { name: 'Contenu légal', note: 'à venir' },
+  { name: 'Contenu légal', href: '/admin/legal', note: 'éditer →' },
 ]
 
 function frDate(iso: string | null) {

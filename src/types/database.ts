@@ -142,6 +142,13 @@ export type BlogPost = {
   updated_at: string
 }
 
+export type SiteContent = {
+  key: string
+  title: string
+  body: string
+  updated_at: string
+}
+
 export type UserRole = 'client' | 'admin'
 
 export type Profile = {
@@ -170,6 +177,7 @@ export interface Database {
       profiles:        { Row: Profile;        Insert: Partial<Profile>;        Update: Partial<Profile>;        Relationships: [] }
       community_posts: { Row: CommunityPost;  Insert: Partial<CommunityPost>;  Update: Partial<CommunityPost>;  Relationships: [] }
       blog_posts:      { Row: BlogPost;       Insert: Partial<BlogPost>;       Update: Partial<BlogPost>;       Relationships: [] }
+      site_content:    { Row: SiteContent;    Insert: Partial<SiteContent>;    Update: Partial<SiteContent>;    Relationships: [] }
     }
     Views: { [_ in never]: never }
     Functions: {

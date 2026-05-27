@@ -6,6 +6,7 @@ import { Footer } from '@/components/ui/Footer'
 import { Cursor } from '@/components/ui/Cursor'
 import { RevealObserver } from '@/components/ui/RevealObserver'
 import { Assistant } from '@/components/assistant/Assistant'
+import { CookieBanner } from '@/components/ui/CookieBanner'
 import '@/styles/globals.css'
 
 export const metadata: Metadata = {
@@ -50,6 +51,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main>{children}</main>
         <Footer />
         <Assistant />
+        <CookieBanner />
         <RevealObserver />
       </body>
     </html>
