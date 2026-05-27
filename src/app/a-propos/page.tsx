@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { createClient } from '@/lib/supabase/server'
 import { TATTOO_STYLE_LABELS } from '@/lib/utils'
 import styles from './page.module.css'
@@ -39,7 +40,7 @@ export default async function AProposPage() {
               <article key={a.id} className={styles.artist}>
                 <div className={styles.artistPortrait}>
                   {a.portrait_url
-                    ? <img src={a.portrait_url} alt={a.name} />
+                    ? <Image src={a.portrait_url} alt={a.name} fill sizes="88px" />
                     : <span>{a.name.split(' ').map((n) => n[0]).join('')}</span>}
                 </div>
                 <div>

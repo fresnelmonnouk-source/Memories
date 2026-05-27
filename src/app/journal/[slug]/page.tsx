@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import styles from '../page.module.css'
@@ -40,7 +41,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       <article className={styles.article}>
         <span className={styles.crumb}><span className={styles.bar} />Journal</span>
         {post.cover_url && (
-          <div className={styles.articleCover}><img src={post.cover_url} alt={post.title} /></div>
+          <div className={styles.articleCover}><Image src={post.cover_url} alt={post.title} fill sizes="(max-width: 760px) 100vw, 720px" /></div>
         )}
         <span className={styles.date}>{frDate(post.published_at)}</span>
         <h1 className={styles.articleTitle}>{post.title}</h1>

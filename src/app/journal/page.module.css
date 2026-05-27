@@ -46,7 +46,7 @@
 }
 .card:hover { border-color: var(--blood); transform: translateY(-4px); }
 
-.cover { aspect-ratio: 16/10; background: var(--bg); overflow: hidden; }
+.cover { position: relative; aspect-ratio: 16/10; background: var(--bg); overflow: hidden; }
 .cover img { width: 100%; height: 100%; object-fit: cover; }
 .coverEmpty {
   width: 100%; height: 100%;
@@ -74,7 +74,7 @@
 /* ===== Article (détail) ===== */
 .article { max-width: 720px; margin: 0 auto; }
 .articleCover {
-  aspect-ratio: 16/9; border-radius: 14px; overflow: hidden; background: var(--paper); margin-bottom: 36px;
+  position: relative; aspect-ratio: 16/9; border-radius: 14px; overflow: hidden; background: var(--paper); margin-bottom: 36px;
 }
 .articleCover img { width: 100%; height: 100%; object-fit: cover; }
 .articleTitle {

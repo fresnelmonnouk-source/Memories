@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { createClient } from '@/lib/supabase/server'
 import { TATTOO_STYLE_LABELS, formatPrice } from '@/lib/utils'
 import type { TattooStyle } from '@/types/database'
@@ -66,7 +67,7 @@ export default async function CataloguePage({
           <article key={t.id} className={styles.card} data-reveal>
             <div className={styles.cardImg}>
               {t.image_url ? (
-                <img src={t.thumbnail_url ?? t.image_url} alt={t.name} />
+                <Image src={t.thumbnail_url ?? t.image_url} alt={t.name} fill sizes="(max-width: 880px) 50vw, 280px" />
               ) : (
                 <div className={styles.placeholder}>{t.name.charAt(0)}</div>
               )}

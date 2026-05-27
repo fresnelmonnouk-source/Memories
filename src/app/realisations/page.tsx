@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { createClient } from '@/lib/supabase/server'
 import { TATTOO_STYLE_LABELS, BODY_ZONE_LABELS } from '@/lib/utils'
 import styles from './page.module.css'
@@ -41,7 +42,7 @@ export default async function RealisationsPage() {
           >
             <div className={styles.imgWrap}>
               {w.image_url ? (
-                <img src={w.image_url} alt={w.title} />
+                <Image src={w.image_url} alt={w.title} fill sizes="(max-width: 880px) 50vw, 25vw" />
               ) : (
                 <div className={styles.placeholder}>{w.title.charAt(0)}</div>
               )}

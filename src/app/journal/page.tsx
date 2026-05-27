@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { createClient } from '@/lib/supabase/server'
 import styles from './page.module.css'
 
@@ -36,7 +37,7 @@ export default async function JournalPage() {
           <Link key={p.id} href={`/journal/${p.slug}`} className={styles.card}>
             <div className={styles.cover}>
               {p.cover_url
-                ? <img src={p.cover_url} alt={p.title} />
+                ? <Image src={p.cover_url} alt={p.title} fill sizes="(max-width: 880px) 100vw, 300px" />
                 : <div className={styles.coverEmpty}>{p.title.charAt(0)}</div>}
             </div>
             <div className={styles.cardBody}>
