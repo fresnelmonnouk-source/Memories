@@ -40,7 +40,7 @@ Exécute dans cet ordre (ceux marqués ✅ sont normalement déjà faits) :
 - [x] `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`
 - [x] `GEMINI_API_KEY` (+ facturation Gemini activée)
 - [x] `DEEPSEEK_API_KEY` (assistant)
-- [ ] `NEXT_PUBLIC_APP_URL` = **`https://ton-domaine`** (⚠️ avec https://, sert au SEO/OG + emails + Stripe)
+- [x] `NEXT_PUBLIC_APP_URL` configuré (⚠️ à re-vérifier le jour du domaine final : doit pointer sur `https://ton-domaine`)
 - [ ] `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, `RESEND_TO_EMAIL` (emails de réservation ; from = domaine vérifié chez Resend, ou `onboarding@resend.dev` en test)
 - [ ] `CRON_SECRET` (nettoyage RGPD auto des essayages — `openssl rand -hex 32`)
 
@@ -94,6 +94,6 @@ Exécute dans cet ordre (ceux marqués ✅ sont normalement déjà faits) :
 
 ### Récap des prérequis bloquants AVANT d'ouvrir au public
 1. `legal.sql` + `community_moderation.sql` + `freemium.sql` exécutés
-2. `NEXT_PUBLIC_APP_URL` = domaine final
+2. ~~`NEXT_PUBLIC_APP_URL`~~ ✅ configuré (re-vérifier au branchement du domaine final)
 3. Vrais artistes/réalisations + relecture légale
 4. Tests fonctionnels passés sur le domaine
