@@ -1,5 +1,6 @@
 import { TATTOO_STYLE_LABELS, BODY_ZONE_LABELS } from '@/lib/utils'
 import type { Realisation, TattooStyle, BodyZone } from '@/types/database'
+import { ImageUpload } from './ImageUpload'
 import styles from './TattooForm.module.css'
 
 const STYLE_KEYS = Object.keys(TATTOO_STYLE_LABELS) as TattooStyle[]
@@ -59,8 +60,8 @@ export function RealisationForm({
       </div>
 
       <div>
-        <label className={styles.label} htmlFor="image_url">URL de l&apos;image</label>
-        <input id="image_url" name="image_url" className={styles.input} type="url" required placeholder="https://…" defaultValue={realisation?.image_url ?? ''} />
+        <label className={styles.label}>Image</label>
+        <ImageUpload name="image_url" kind="realisations" defaultUrl={realisation?.image_url} />
       </div>
 
       <div>

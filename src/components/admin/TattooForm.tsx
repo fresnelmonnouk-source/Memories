@@ -1,5 +1,6 @@
 import { TATTOO_STYLE_LABELS } from '@/lib/utils'
 import type { Tattoo, TattooStyle } from '@/types/database'
+import { ImageUpload } from './ImageUpload'
 import styles from './TattooForm.module.css'
 
 const STYLE_KEYS = Object.keys(TATTOO_STYLE_LABELS) as TattooStyle[]
@@ -58,8 +59,8 @@ export function TattooForm({
       </div>
 
       <div>
-        <label className={styles.label} htmlFor="image_url">URL de l&apos;image</label>
-        <input id="image_url" name="image_url" className={styles.input} type="url" required placeholder="https://…/tattoos/mon-motif.png" defaultValue={tattoo?.image_url ?? ''} />
+        <label className={styles.label}>Image</label>
+        <ImageUpload name="image_url" kind="catalogue" defaultUrl={tattoo?.image_url} />
       </div>
 
       <div className={styles.checks}>
