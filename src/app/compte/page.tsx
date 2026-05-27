@@ -102,6 +102,7 @@ export default async function ComptePage() {
         <Link href="/essayage" className={styles.btnPrimary}>Nouvel essayage <span>→</span></Link>
         <Link href="/communaute" className={styles.btnGhost}>Communauté</Link>
         <Link href="/reservation" className={styles.btnGhost}>Réserver</Link>
+        <Link href="/abonnement" className={styles.btnGhost}>{subscribed ? 'Mon abonnement' : 'Passer à l\'illimité'}</Link>
         {isAdmin && <Link href="/admin" className={styles.btnGhost}>Back office</Link>}
         <form action="/auth/signout" method="post">
           <button type="submit" className={styles.signout}>Se déconnecter</button>

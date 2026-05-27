@@ -234,9 +234,8 @@ export function TryonLab({ tattoos }: { tattoos: TattooItem[] }) {
       )}
       {gate === 'subscription' && (
         <div className={styles.gate}>
-          <span className={styles.gateText}>
-            L&apos;abonnement <strong>4 €/mois</strong> arrive très bientôt pour essayer sans limite.
-          </span>
+          <span className={styles.gateText}>Tu as utilisé tes essais gratuits.</span>
+          <a href="/abonnement" className={styles.gatePrimary}>S&apos;abonner — 4 €/mois →</a>
         </div>
       )}
 

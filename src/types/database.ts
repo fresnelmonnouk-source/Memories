@@ -159,6 +159,8 @@ export type Profile = {
   role: UserRole
   account_tryouts_used: number
   subscription_status: string
+  stripe_customer_id: string | null
+  stripe_subscription_id: string | null
   created_at: string
   updated_at: string
 }
